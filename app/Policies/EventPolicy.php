@@ -1,0 +1,20 @@
+<?php
+// FILE: app/Policies/EventPolicy.php
+
+namespace App\Policies;
+
+use App\Models\Event;
+use App\Models\User;
+
+class EventPolicy
+{
+    public function update(User $user, Event $event): bool
+    {
+        return $user->is_admin || $user->id === $event->user_id;
+    }
+
+    public function delete(User $user, Event $event): bool
+    {
+        return $user->is_admin || $user->id === $event->user_id;
+    }
+}
